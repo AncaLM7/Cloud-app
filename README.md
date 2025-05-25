@@ -1,40 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Cloud App – Documentație proiect
 
-## Getting Started
+## 🔹 Introducere
 
-First, run the development server:
+Această aplicație web permite gestionarea unei colecții de articole prin operațiuni CRUD (Create, Read, Update, Delete), utilizând MongoDB Atlas pentru stocarea datelor și OpenAI ChatGPT pentru asistență conversațională. Aplicația este construită cu Next.js, TailwindCSS și este publicată în cloud prin AWS EC2.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🔹 Descriere problemă (0.25p)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Gestionarea digitală a articolelor poate deveni ineficientă în lipsa unui sistem centralizat. Aplicația vine în sprijinul utilizatorilor oferind o interfață intuitivă de creare, editare și ștergere articole, împreună cu un chatbot integrat pentru clarificări și informații.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## 🔹 Descriere API (0.25p)
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Aplicația expune două API-uri principale:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+- `/api/records` – Operațiuni CRUD
+- `/api/answer` – Interacțiune cu OpenAI ChatGPT
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Metodă HTTP | Rută                  | Funcționalitate          |
+|-------------|-----------------------|--------------------------|
+| `GET`       | `/api/records`        | Afișează toate articolele |
+| `GET`       | `/api/records?id=...` | Afișează un articol       |
+| `POST`      | `/api/records`        | Creează un articol       |
+| `PUT`       | `/api/records`        | Editează un articol      |
+| `DELETE`    | `/api/records?id=...` | Șterge un articol        |
+| `POST`      | `/api/answer`         | Trimite întrebări către ChatGPT |
 
-## Learn More
+## 🔹 Flux de date (0.25p)
 
-To learn more about Next.js, take a look at the following resources:
+1. Utilizatorul interacționează cu interfața.
+2. Request-ul este trimis către API.
+3. MongoDB Atlas gestionează datele.
+4. Răspunsul este afișat în UI.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+## 🔹 Exemple de request / response
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+###  Creare articol
 
-## Deploy on Vercel
+```http
+POST /api/records
+Content-Type: application/json
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+{
+  "title": "Exemplu",
+  "description": "Acesta este un articol de test."
+}
+POST /api/answer
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "Cine este Albert Einstein?"
+    }
+  ],
+  "type": "user"
+}
+| Metodă   | Endpoint       | Scop                   |
+| -------- | -------------- | ---------------------- |
+| `GET`    | `/api/records` | Afișează articolele    |
+| `POST`   | `/api/records` | Creează un articol     |
+| `PUT`    | `/api/records` | Editează un articol    |
+| `DELETE` | `/api/records` | Șterge un articol      |
+| `POST`   | `/api/answer`  | Trimite mesaj către AI |
+🔹 Autentificare & Autorizare
+MongoDB Atlas: prin URI în .env
+
+OpenAI API: prin OPENAI_API_KEY în .env
+
+Referințe
+Next.js
+
+TailwindCSS
+
+MongoDB Atlas
+
+OpenAI
+
+Docker
+
+AWS EC2
+
+YouTube (nelistat): https://youtu.be/8TMvkr0dsfk
+Git:  https://github.com/AncaLM7/Cloud-app.git
+Vercel: 
+https://cloud-app-sand.vercel.app/
+https://cloud-app-sand.vercel.app/chat
+AWS: http://51.21.81.80
+
