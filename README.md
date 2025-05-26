@@ -79,7 +79,7 @@ Docker
 
 AWS EC2
 
-YouTube (nelistat): https://youtu.be/8TMvkr0dsfk
+
 Git:  https://github.com/AncaLM7/Cloud-app.git
 Vercel: 
 https://cloud-app-sand.vercel.app/
